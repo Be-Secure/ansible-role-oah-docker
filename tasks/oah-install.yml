@@ -41,12 +41,14 @@
   when: add_repository_key is failed
 
 - name: Add Docker repository.
+  become: yes
   apt_repository:
     repo: "{{ docker_apt_repository }}"
     state: present
     update_cache: true
 
 - name: Install Docker.
+  become: yes
   package:
     name: "{{ docker_package }}"
     state: "{{ docker_package_state }}"

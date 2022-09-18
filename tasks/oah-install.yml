@@ -7,6 +7,7 @@
     state: absent
 
 - name: Ensure dependencies are installed.
+  become: yes
   apt:
     name:
       - apt-transport-https
@@ -14,12 +15,14 @@
     state: present
 
 - name: Ensure additional dependencies are installed (on Ubuntu < 20.04 and any other systems).
+  become: yes
   apt:
     name: gnupg2
     state: present
   when: ansible_distribution != 'Ubuntu' or ansible_distribution_version is version('20.04', '<')
 
 - name: Ensure additional dependencies are installed (on Ubuntu >= 20.04).
+  become: yes
   apt:
     name: gnupg
     state: present

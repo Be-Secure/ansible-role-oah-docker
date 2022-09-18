@@ -7,8 +7,14 @@
   no_log: True
 
 - name: Docker is installed
+  fail:
+    msg: "Docker installation not found"
+  when: "{{docker_command.rc != 0}}"
+
+- name: Docker is installed
   debug:
-    msg: "{% if docker_command.rc == 0 %} Docker is installed {% else %} Docker Not found {% endif %}"
+    msg: Docker is Installed
+  when: "{{docker_command.rc == 0}}"
 
 - name: Ensure /etc/docker/ directory exists.
   file:

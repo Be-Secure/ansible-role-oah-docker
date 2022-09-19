@@ -5,9 +5,10 @@
     name: "{{ docker_uninstall_items}}"
     state: absent
     update_cache: yes
+  ignore_errors: True
 
 - name: Upgrading to the Latest version
-  include: "tasks/bes-install.yml"
+  include: "tasks/oah-install.yml"
 
 
 
